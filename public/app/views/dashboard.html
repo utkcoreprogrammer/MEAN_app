@@ -1,0 +1,264 @@
+<body>
+<center> <header><h1>Hiiiii</h1> </header></center>
+
+<ul class="nav nav-tabs">
+  <div class="col-md-4">
+    <div class="col-md-6">
+      <li>
+        <a href= "/friends" data-toggle="tab"><h2>Friends</h2></a>
+      </li>
+    </div>
+
+    <div class="col-md-6">
+      <li>
+        <a href="/groups" data-toggle="tab"><h2>Groups</h2></a>
+      </li>
+    </div>
+  </div>
+</ul>
+<div class="tab-content">
+ <div class="tab-pane active" id="friends">
+ </div>
+ <div class="tab-pane" id="groups">
+ </div>
+
+</div>
+<div class="col-md-4">
+</div>
+<div class="col-md-4">
+  <a class="btn btn-lg btn-warning" data-toggle="modal" data-target="#billModal" style="height: 45px;">
+
+    Add a bill
+  </a>
+  <a class="btn btn-lg btn-success" data-toggle="modal" data-target="#settleModal" style="height: 45px;">
+    Settle up 
+  </a>
+ <!--  <div ng-controller="calcController">
+   <button type="button" class="btn btn-lg btn-primary" ng-click="BillDataFunc()" >Setup a Bill Record</button>
+ </div> -->
+</div>
+
+<div class="modal fade" id="billModal" role="dialog" >
+  <div class="modal-dialog modal-sm" style="height: 70px;">
+    <div class="modal-content">
+      <div class="modal-header" style="background: #5cc5a7;">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <header ><h3>Add a Bill </h3></header>
+      </div>
+      <div class="modal-body">
+        <label> With you and: <br/></label>
+
+        <input type="text" name="bill" class="bill" id="bill" ng-model="Bill.members.name2" autocomplete="on" placeholder="Enter name or email" ng-list>
+        <div class="pull-right"> <button type="btn btn-sm btn-success" data-toggle="modal" data-dismiss="modal" data-target="#billDescModal">
+        Next </button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="settleModal" role="dialog">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header" style="background: #5cc5a7;">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <header ><h3>Settle Up </h3></header>
+      </div>
+      <div class="modal-body">
+        <h4 style="font-family: Lucida Sans Unicode;">Choose a payment method</h4>
+        <br/>
+        <button type="button" class="btn btn-block btn-primary">Setup a Bill Record</button>
+        <br/>
+        <button type="button" class="btn btn-block btn-danger">Pay via Paytm</button> 
+        <br/>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="billDescModal" role="dialog">
+  <div class="modal-dialog modal-sm" style="height: 70px;">
+    <div class="modal-content">
+      <div class="modal-header" style="background: #5cc5a7;">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <header ><h3>Bill Description </h3></header> 
+      </div>
+      <div class="modal-body">
+        With <b>you </b> and: {{Bill.members.name2}} <br/>
+        <hr/>
+        <i class="fas fa-utensils fa-2x" style="float: left;"></i>
+        <input type="text" name="bill" ng-model="Bill.groupName" placeholder="Enter a description" style="margin-left: 10px;height:30px;">
+        <br />
+        <i class="fas fa-rupee-sign fa-2x" style="float: left;margin-top:5px;"></i>
+        <input type="text" name="bill" ng-model="Bill.amount" placeholder="Amount in Rs." style="margin-left: 13px; margin-top: 10px;height: 30px;"> 
+        <div> <br/>Paid by <button>You</button> and split <button data-toggle="modal" data-target="#splitBillModal">equally</button> </div>
+        <hr/>
+        <button type="button" style="border-radius: 10px;margin-top:15px;" class="btn btn-block btn-secondary">You owe {{Bill.members.name2}} Rs. </button>
+
+        <br/>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="splitBillModal" role="dialog">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header" style="background: #5cc5a7;">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <header ><h3> Split the Bill </h3></header> 
+      </div>
+      <div class="modal-body">
+        <div class="text-align-center">
+         <button type="button" style="border-radius: 10px;" class="btn btn-block btn-success">Split the Bill</button>
+       </div> <!-- End of Text Align Center -->
+       <br/>
+       <br/>
+       <div class="text-align-center" id="icon_tray">           
+        <button id="Split_Equally" title="Split bill equally" ng-click="splitEqually();showme1=true"><span style="font-size:22px;">&#61; </span> </button>
+        <button id="Split_By_Percentage" title="Split bill by Percentage" ng-click="splitByPercentage();showme2=true" style="margin-left: 10px;"><span style="font-size:22px;">&#37; </span> </button>
+        <button id="Split_By_Shares" title="Split bill by shares" style="margin-left: 10px;" ng-click="splitByShares();showme3=true"><span style="font-size:22px;">&#45;  </span></button>
+        <button id="Split_Custom" title="Custom Amount Entry" style="margin-left: 10px;" ng-click="splitCustom();showme4=true"><span style="font-size:22px;"> &#x20b9; </span></button>
+      </div>  <!-- End of Text Align Center -->
+      <br/>
+
+      <div ng-show="showme1">
+        <ul style="list-style-type:none">
+          <div class="col-md-7">
+            <li ng-repeat="name in Bill.members.name2"> 
+              <p style="font-family: Lucida Sans Unicode;size:16px;padding-top: 5px;margin-bottom: 7px;">{{name}} </p>
+            </li>
+          </div>
+          <div class="col-md-5">
+            <li ng-repeat="value in Bill.members.values2"> 
+              <input type="text" placeholder= "{{Bill_equally}}" style="margin-bottom:5px;padding-top:5px; width:100px;height:28px;"/> </li>
+            </div>
+            
+            <div>
+
+              <div class="col-md-7">
+                <li style="list-style-type: none"> <p style="font-family: Lucida Sans Unicode;size:16px;">{{self}} </p> </li> 
+              </div>
+              <div class="col-md-5">
+                <li>
+                 <input type="text" placeholder= "{{Bill_equally}}" style="width:100px;"> </li>
+               </div>
+             </div>
+
+           </ul>
+
+           <button type="button" class="btn btn-sm btn-success" style="margin-left: 80px;margin-top: 10px; margin-bottom:10px;" ng-click="saveBillDataEqually()" data-dismiss="modal">
+            Save
+          </button>   
+          <button type="button" class="btn btn-sm btn-danger" 
+          style="margin-left: 20px; margin-top: 10px;margin-bottom: 10px;" data-dismiss="modal">
+          Cancel
+        </button> 
+      </div> <!-- End of showme1-->
+      <div ng-show="showme2">
+        <ul style="list-style-type:none">
+          <div class="col-md-7">
+            <li ng-repeat="name in Bill.members.name2 track by $index"> 
+              <p style="font-family: Lucida Sans Unicode;size:16px;padding-top: 5px; margin-bottom: 7px;"> {{name}} </p>
+            </li>
+          </div>
+          <div class="col-md-5">
+            <li ng-repeat="value in Bill.members.name2 track by $index">            
+             <input type="text" id="percentValues" ng-model= "Bill.members.values2[$index]" placeholder= "Enter Percentage" style="margin-bottom:5px;padding-top:5px; width:100px;height:28px;" ng-list/></li>
+
+             
+           </div>
+
+           <div>
+
+             <div class="col-md-7">
+              <li style="list-style-type: none"> <p style="font-family: Lucida Sans Unicode;size:16px;">{{self}} </p> </li> 
+            </div>
+            <div class="col-md-5">
+              <li>
+               <input type="text" placeholder= "{{percentPlaceholder}}" style="width:100px;"/>
+             </li>
+           </div>
+         </div>
+
+       </ul>
+
+       <button type="button" class="btn btn-sm btn-success" style="margin-left: 80px;margin-top: 10px; margin-bottom:10px;" ng-click="saveBillDataPercent()" data-dismiss="modal">
+        Save
+      </button>
+
+
+      <button type="button" class="btn btn-sm btn-danger" style="margin-left: 20px; margin-top: 10px;margin-bottom: 10px;" data-dismiss="modal">
+        Cancel
+      </button> 
+
+    </div> <!-- End of showme2 -->
+    <div ng-show="showme3">
+      <ul style="list-style-type:none">
+        <div class="col-md-7">
+          <li ng-repeat="member in Bill.members"> 
+            <p style="font-family: Lucida Sans Unicode;size:16px;padding-top: 5px;margin-bottom: 7px;"> {{member}} </p>
+          </li>
+        </div>
+        <div class="col-md-5">
+          <li ng-repeat="member in Bill.members"> 
+            <input type="text" placeholder= "Enter Share(s)" style="margin-bottom:5px;padding-top:5px; width:100px;height:28px;" ng-model= "Values.ByShare[$index]"/> </li>
+          </div>
+
+          <div>
+
+           <div class="col-md-7">
+            <li style="list-style-type: none"> <p style="font-family: Lucida Sans Unicode;size:16px;">{{self}}</p> </li> 
+          </div>
+          <div class="col-md-5"> 
+            <li>
+             <input type="text" placeholder= "{{sharesPlaceholder}}" style="width:100px;" ng-model="Values.ByShareSelf" /> </li>
+           </div>
+         </div>
+
+       </ul>
+       <button type="button" class="btn btn-sm btn-success" style="margin-left: 80px;margin-top: 10px; margin-bottom:10px;" ng-click="saveBillDataShares()" data-dismiss="modal">
+        Save
+      </button>
+
+
+      <button type="button" class="btn btn-sm btn-danger" style="margin-left: 20px; margin-top: 10px;margin-bottom: 10px;" data-dismiss="modal">
+        Cancel
+      </button> 
+    </div> <!-- End of showme3 -->
+    <div ng-show="showme4">
+      <ul style="list-style-type:none">           
+        <div class="col-md-7">
+          <li ng-repeat="member in Bill.members"> 
+            <p style="font-family: Lucida Sans Unicode;size:16px;padding-top: 5px;margin-bottom: 7px;"> {{member}} </p>
+          </li>
+        </div>
+        <div class="col-md-5">
+          <li ng-repeat="member in Bill.members"> 
+            <input type="text" placeholder= "Enter Custom Amount" style="margin-bottom:5px;padding-top:5px; width:100px;height:28px;" ng-model= "Values.Custom[$index]"/> 
+          </li>
+        </div>
+
+        <div>
+
+         <div class="col-md-7">
+          <li style="list-style-type: none"> <p style="font-family: Lucida Sans Unicode;size:16px;">{{self}}</p> </li> 
+        </div>
+        <div class="col-md-5">
+          <li>
+           <input type="text" placeholder= "{{customPlaceholder}}" style="width:100px;" ng-model=
+           "Values.CustomSelf" /> 
+         </li>
+       </div>
+     </div>
+
+   </ul>
+   <button type="button" class="btn btn-sm btn-success" style="margin-left: 80px;margin-top: 10px; margin-bottom:10px;" ng-click="saveBillDataCustom()" data-dismiss="modal">
+    Save
+  </button>
+
+
+  <button type="button" class="btn btn-sm btn-danger" style="margin-left: 20px; margin-top: 10px;margin-bottom: 10px;" data-dismiss="modal">
+    Cancel
+  </button> 
+</div>
+</div>
+</div>
+</div>
+</body>

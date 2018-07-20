@@ -3,15 +3,18 @@ var app = angular.module("routesApp", ["ngRoute"])
 {
 		$routeProvider.caseInsensitiveMatch =true;
 			$routeProvider
-			.when("/",
+			.when("/home",
 			{
-			redirectTo  : "/"
+			templateUrl : "app/views/pages/home.html",
+			controller :  "mainCtrl",
+			controllerAs :  "main"
 			})
 
 			.when("/login", 
 			{
-			templateUrl : "app/views/pages/login.html"
-			// controller :  ""		
+			templateUrl : "app/views/pages/login.html",
+			controller :  "mainCtrl",
+			controllerAs :  "main"		
 			}) 
 			.when("/register", 
 			{
@@ -20,11 +23,23 @@ var app = angular.module("routesApp", ["ngRoute"])
 			controllerAs :  "register"			
 			}) 
 
-			// .when("/groups", 
-			// {
-			// templateUrl : "Templates/groups.html",
-			// controller :  "groupsController"
-			// })
+			.when("/dashboard", 
+			{
+			templateUrl : "app/views/dashboard.html",
+			controller :  "mainCtrl",
+			controllerAs :  "main"			
+			}) 
+			.when("/friends", 
+			{
+			templateUrl : "app/views/pages/friends.html",
+			controller :  "mainCtrl"		
+			}) 
+
+			.when("/groups", 
+			{
+			templateUrl : "app/views/pages/groups.html",
+			controller :  "mainCtrl"
+			})
 
 			// .when("/friendList", 
 			// {
@@ -44,7 +59,7 @@ var app = angular.module("routesApp", ["ngRoute"])
 			// })
 
 			.otherwise ({
-				redirectTo : "/error"
+				redirectTo : "/"
 				});
 			$locationProvider.html5Mode({
   				enabled: true,

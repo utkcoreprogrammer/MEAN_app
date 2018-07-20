@@ -8,19 +8,21 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
-  	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
-  	<link rel="stylesheet" href= "assets/css/styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href= "assets/css/styles.css" />
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.9/angular.js"> </script>
-  	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.9/angular-route.min.js"></script>
-  	<script src="app/app.js"> </script>
-  	<script src="app/routes.js"> </script>
-  	<script src="app/controllers/registerCtrl.js"> </script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.9/angular-route.min.js"></script>
+  <script src="app/app.js"> </script>
+  <script src="app/routes.js"> </script>
+  <script src="app/controllers/mainCtrl.js"> </script>
+  <script src="app/controllers/registerCtrl.js"> </script>
 	<script src="app/services/userServices.js"> </script>
- 	<style> body{background-size: cover; background-image:url("public/assets/images/money.jpg");" } </style>
+  <script src="app/services/authServices.js"> </script>
+ <!-- 	<style> body{background-size: cover; background-image:url("public/assets/images/money.jpg");" } </style> -->
 </head>
-<body ng-app = "splitwiseApp">
+<body ng-app = "splitwiseApp" ng-controller="mainCtrl as main">
 	<nav class="navbar" style="background-color: #87CEEB;">
 		<div class="container-fluid">
     		<div class="navbar-header pull-left">

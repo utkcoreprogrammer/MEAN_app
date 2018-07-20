@@ -1,7 +1,7 @@
 angular.module('userServices',[])
 .factory('User',function($http)
 {
-	userFactory={};
+	var userFactory={};
 	console.log("Service hitting");
 //custom function
 userFactory.create=function(regData)

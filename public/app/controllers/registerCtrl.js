@@ -3,31 +3,26 @@ angular.module('userCtrls',['userServices'])
 {	
 	$scope.eml_add = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 	$scope.pass_regex= /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/;
-	var app=this;
-	this.regUser=function(regData)
+	var app = this;
+	app.regUser=function(regData)
 	{
-		app.loading=true;
-		app.errorMsg=false;
-		console.log(this.regData);
-
-User.create(app.regData).then(function(data)
-{
-	console.log(data.data.success);
-	console.log(data.data.message);
-	if(data.data.success)
-	{
-		app.loading=false;
-		app.successMsg=data.data.message +'....Redirecting';
-		$timeout(function()	
+		
+		User.create(app.regData).then(function(data)
 		{
-		$location.path('/');
-		},2000);
-	}
-	else
-	{
-	app.loading=false;
-	app.errorMsg=data.data.message;
-	}
-});
-};
+			if(app.regData)
+			{
+				
+				alert("User Successfully Registered");
+				$timeout(function() 
+				{	
+				$location.path('/home');
+				}, 1000);
+			}
+			else
+			{
+				
+				alert("Please fill out all the fields");
+			}
+		});
+	};
 });

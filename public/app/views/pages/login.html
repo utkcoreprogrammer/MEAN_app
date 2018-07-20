@@ -2,13 +2,13 @@
 <center> <header><h1>Welcome to the splitwise</h1> </header></center>
 <div class="container">
 	<section id="content">
-		<form name="form1" method="post">
+		<form name="form1" method="post" ng-submit="main.loginHandler(credentials);">
 			<h1>Login Form</h1>
 			<div>
-				<input type="text" id="username" placeholder="Enter your Username or Email" ng-required="true" id="username" />
+				<input type="text" id="username" name = "username" placeholder="Enter your Email" ng-required="true" ng-model = "main.credentials.email" />
 			</div>
 			<div>
-				<input type="password" name= "pass" placeholder="Enter your Password" ng-required="true" id="password" />
+				<input type="password" name= "password" placeholder="Enter your Password" ng-required="true" id="password" ng-model = "main.credentials.password" />
 				<!-- <span ng-if="form1.pass.$error.pattern">Not a valid password!</span> -->
 			</div>
 
@@ -17,11 +17,15 @@
 			</div>
 
 			<div class="">
-				<a href="register.html" style="text-decoration: none;" title="Register on SPLITWISE">
+				<a href="/register" style="text-decoration: none;" title="Register on SPLITWISE">
 					<span style="font-family: Rockwell; font-size:13px;">New User ?  Signup Here </span></a>
-				</div>
+			</div>
 
-			</form><!-- form -->
+			<div ng-show = "1==1">
+				<span style="color: red" ng-if="form1.password.$error.required && form1.password.$touched">Password is required</span> 
+			</div>
+
+		</form><!-- form -->
 
 	</section><!-- content -->
 </div>
