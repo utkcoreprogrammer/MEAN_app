@@ -4,7 +4,7 @@ var userSchema = new Schema(
 	{
 		username: {type: String, lowercase: true},
 		email: {type: String, lowercase: true},
-		password: {type: String, maxlength: 14, minlength : 6}
+		password: {type: String, maxlength: 15, minlength : 8}
 
 
 

@@ -22,18 +22,29 @@
   <script src="app/services/authServices.js"> </script>
  <!-- 	<style> body{background-size: cover; background-image:url("public/assets/images/money.jpg");" } </style> -->
 </head>
-<body ng-app = "splitwiseApp" ng-controller="mainCtrl as main">
+<body ng-app = "splitwiseApp" ng-controller="mainCtrl as main" ng-cloak>
 	<nav class="navbar" style="background-color: #87CEEB;">
 		<div class="container-fluid">
     		<div class="navbar-header pull-left">
-      			<a class="navbar-brand" href="#">Splitwise</a>
+      			<a class="navbar-brand" href="/">Splitwise</a>
     		</div>
     		<ul class="nav navbar-nav">
       			<li class="active"><a href="/">Home</a></li>
-      			<li><a class="btn btn-sm btn-primary" style="height:50px;width:80px;text-decoration:none;" href="/login">Login</a></li> 
-      			<li><a href="/register" class="btn btn-sm btn-danger" style="height:50px;width:80px;">Signup</a></li>
-    		</ul>
-  		</div>
+      			<li><a class="btn btn-sm btn-primary" style="height:50px;width:80px;text-decoration:none;" ng-show = "!main.userLoggedIn" href="/login">Login</a></li> 
+      			<li><a href="/register" class="btn btn-sm btn-danger" ng-show = "!main.userLoggedIn" style="height:50px;width:80px;">Signup</a></li>
+        </ul>
+            <ul class="nav pull-right">
+                <li><a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <span style="font-size:16px;font-family: Rockwell;">{{main.username}}
+                    </span><b class="caret"></b> </a> 
+                  <ul class="dropdown-menu pull-right">
+                    <li><a href="#" data-method="post" ng-click = "main.logOut()" ng-show= "main.userLoggedIn">Logout</a>
+                    </li>
+                    <li><a href="/groups/new">Create a group</a></li>
+                  </ul> 
+                </li>
+            </ul>         
+  	</div>
   <!-- Navbar content -->
 	</nav>
 	<ng-view> </ng-view>

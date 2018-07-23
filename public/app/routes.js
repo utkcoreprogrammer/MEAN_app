@@ -29,6 +29,20 @@ var app = angular.module("routesApp", ["ngRoute"])
 			controller :  "mainCtrl",
 			controllerAs :  "main"			
 			}) 
+
+			.when("/logout", 
+			{
+			templateUrl : "app/views/pages/logout.html",
+			controller :  "mainCtrl",
+			controllerAs :  "main"			
+			})
+			.when("/logoutWait", 
+			{
+			templateUrl : "app/views/pages/logoutWait.html",
+			controller :  "mainCtrl",
+			controllerAs :  "main"			
+			})
+
 			.when("/friends", 
 			{
 			templateUrl : "app/views/pages/friends.html",

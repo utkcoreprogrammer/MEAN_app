@@ -1,5 +1,7 @@
 var User = require('../models/userModel');
-
+var Friend = require('../models/friendModel');
+var jwt = require('jsonwebtoken');
+var secret = "Harry";
 module.exports = function(router) {
 
 
@@ -34,6 +36,7 @@ router.post('/authenticate', function(req,res)
 
 {
 	//var user = new User();
+	//var user_name = req.body.username;
 	var email = req.body.email;
 	var password = req.body.password;
 	console.log(email);
@@ -61,7 +64,8 @@ router.post('/authenticate', function(req,res)
 
 				else if(userdetails.email == email && userdetails.password == password)
 				{
-					res.status(200).json({success: true, message : "user authenticated"});
+					var token = jwt.sign({ email: userdetails.email, username : userdetails.username }, secret, {expiresIn : '1h'});
+					res.status(200).json({success: true, message : "user authenticated", token : token});
 				}
 				
 				else
@@ -73,5 +77,68 @@ router.post('/authenticate', function(req,res)
 		});
 	}	
 });
+
+router.use(function(req,res,next)
+{
+	var token = req.body.token || req.body.query || req.headers['x-access-token'];
+	if(token)
+	{
+		jwt.verify(token, secret, function(err,decoded)
+
+		{
+			if(err)
+			{
+				res.json({success : false, message : "Token invalid"});
+			}
+			else
+			{
+				req.decoded = decoded;
+				next();
+			}
+
+		});
+	}
+	else
+	{
+		res.json({success : false, message :  "No token provided"});
+	}
+});
+
+router.post('/currentUser', function(req,res)
+
+{
+
+	res.send(req.decoded);
+});
+
+router.post('/friendList', function(req,res)
+
+{
+	var friend = new Friend();
+	friend.fname = req.body.fname; 
+	friend.email = req.body.email;
+
+	if(req.body.fname == null || req.body.fname == '' || req.body.email == null || req.body.email == '')
+	{
+		res.json({success: false, message: "Ensure that Name & Email is provided"});
+	}
+		else 
+	{
+		friend.save((err, user) => 
+		{
+			if(err)
+			{
+			res.json({success: false, message: "Username or Email already taken"});
+			}
+			else
+			{
+			res.status(200).json({success: true, message : "Friend added"});
+			}
+		});
+	}
+	
+});
+
  return router;
 }
+

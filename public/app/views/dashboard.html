@@ -21,7 +21,6 @@
  </div>
  <div class="tab-pane" id="groups">
  </div>
-
 </div>
 <div class="col-md-4">
 </div>
@@ -30,14 +29,11 @@
 
     Add a bill
   </a>
-  <a class="btn btn-lg btn-success" data-toggle="modal" data-target="#settleModal" style="height: 45px;">
-    Settle up 
+  <a class="btn btn-lg btn-success" data-toggle="modal" data-target="#settleModal"  style="height: 45px;">Settle up 
   </a>
- <!--  <div ng-controller="calcController">
-   <button type="button" class="btn btn-lg btn-primary" ng-click="BillDataFunc()" >Setup a Bill Record</button>
- </div> -->
 </div>
-
+</div>            
+</div>  
 <div class="modal fade" id="billModal" role="dialog" >
   <div class="modal-dialog modal-sm" style="height: 70px;">
     <div class="modal-content">
@@ -49,12 +45,14 @@
         <label> With you and: <br/></label>
 
         <input type="text" name="bill" class="bill" id="bill" ng-model="Bill.members.name2" autocomplete="on" placeholder="Enter name or email" ng-list>
-        <div class="pull-right"> <button type="btn btn-sm btn-success" data-toggle="modal" data-dismiss="modal" data-target="#billDescModal">
+        <div class="pull-right"> <button type="btn btn-sm btn-success" data-toggle="modal" data-dismiss="modal" data-target="#billDescModal" ng-click="Bill_check()">
         Next </button>
       </div>
     </div>
   </div>
+  </div>
 </div>
+
 <div class="modal fade" id="settleModal" role="dialog">
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
@@ -257,8 +255,15 @@
   <button type="button" class="btn btn-sm btn-danger" style="margin-left: 20px; margin-top: 10px;margin-bottom: 10px;" data-dismiss="modal">
     Cancel
   </button> 
-</div>
-</div>
-</div>
-</div>
+</div> <!--End of showme4 -->
+<br/>
+<br/>
+
+
+
+
+</div> <!-- Modal Body -->
+</div>  <!-- Modal Content -->
+</div>  <!-- Modal Dialog --> 
+</div> <!-- Modal Fade -->
 </body>
