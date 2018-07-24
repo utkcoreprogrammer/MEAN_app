@@ -25,4 +25,18 @@ angular.module('userCtrls',['userServices'])
 			}
 		});
 	};
+
+
+	//function for storing friends data
+
+
+
+	this.createfriend= function(friendData)
+	{	
+		console.log("Inside add friend",friendData);
+		$http.post('/api/friendList',this.friendData)
+		
+	
+	};
+
 });

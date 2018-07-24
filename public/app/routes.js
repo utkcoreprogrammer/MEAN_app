@@ -46,7 +46,8 @@ var app = angular.module("routesApp", ["ngRoute"])
 			.when("/friends", 
 			{
 			templateUrl : "app/views/pages/friends.html",
-			controller :  "mainCtrl"		
+			controller :  "registerCtrl",
+			controllerAs :  "register"
 			}) 
 
 			.when("/groups", 

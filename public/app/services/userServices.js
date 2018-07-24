@@ -2,7 +2,7 @@ angular.module('userServices',[])
 .factory('User',function($http)
 {
 	var userFactory={};
-	var friendFactory = {};
+	// var friendFactory = {};
 	console.log("User Service hitting");
 //custom function
 userFactory.create=function(regData)
@@ -11,11 +11,11 @@ userFactory.create=function(regData)
 }
 	return userFactory;
 
-friendFactory.createNew=function(friend)
-{
-	return $http.post('/api/friendList',friend);
-}
-	return friendFactory;
+// friendFactory.createNew=function(friend)
+// {
+// 	return $http.post('/api/friendList',friend);
+// }
+// 	return friendFactory;
 
 
 

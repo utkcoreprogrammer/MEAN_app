@@ -78,6 +78,35 @@ router.post('/authenticate', function(req,res)
 	}	
 });
 
+router.post('/friendList', function(req,res)
+
+{
+	console.log("hitting friendli");
+	var friend = new Friend();
+	friend.fname = req.body.fname; 
+	friend.email = req.body.email;
+
+	if(req.body.fname == null || req.body.fname == '' || req.body.email == null || req.body.email == '')
+	{
+		res.json({success: false, message: "Ensure that Name & Email is provided"});
+	}
+		else 
+	{
+		friend.save((err, user) => 
+		{
+			if(err)
+			{
+			res.json({success: false, message: "Username or Email already taken"});
+			}
+			else
+			{
+			res.status(200).json({success: true, message : "Friend added"});
+			}
+		});
+	}
+	
+});
+
 router.use(function(req,res,next)
 {
 	var token = req.body.token || req.body.query || req.headers['x-access-token'];
@@ -111,33 +140,7 @@ router.post('/currentUser', function(req,res)
 	res.send(req.decoded);
 });
 
-router.post('/friendList', function(req,res)
 
-{
-	var friend = new Friend();
-	friend.fname = req.body.fname; 
-	friend.email = req.body.email;
-
-	if(req.body.fname == null || req.body.fname == '' || req.body.email == null || req.body.email == '')
-	{
-		res.json({success: false, message: "Ensure that Name & Email is provided"});
-	}
-		else 
-	{
-		friend.save((err, user) => 
-		{
-			if(err)
-			{
-			res.json({success: false, message: "Username or Email already taken"});
-			}
-			else
-			{
-			res.status(200).json({success: true, message : "Friend added"});
-			}
-		});
-	}
-	
-});
 
  return router;
 }

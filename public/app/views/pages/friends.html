@@ -1,9 +1,9 @@
-<center> <header><h1>Welcome {{main.username}}</h1> </header></center>
+<!-- <center> <header><h1>Welcome {{main.username}}</h1> </header></center>
 <ul class="nav nav-tabs">
   <div class="col-md-4">
     <div class="col-md-6">
       <li>
-        <a href= "/friends" data-toggle="tab"><h2>Friends</h2></a>
+        <a href= "/" data-toggle="tab"><h2>Friends</h2></a>
       </li>
     </div>
 
@@ -40,30 +40,13 @@
     Settle up 
   </a>
 </div>
-<div class="">
+<div class=""> -->
   
 
 
-<table class="table table-striped table-bordered">
-  <thead>
-    <tr>
-      <th> Friends </th>
-      <!--<th> Email</th> -->
-      
-    </tr>
-  </thead>
-  <tbody>
-         <tr ng-repeat="Friend in FriendList track by $index">
-            <td>
-              <a href="#/friendList" style="color: black;">{{Friend.name}} 
-              </a>
-            </td>
-           <!-- <td>{{Friend.email}} -->
-            
-         </tr>                                
-  </tbody>
-</table>
-
+<!-- <table class="table table-striped table-bordered"
+<! </table> -->
+<!-- 
 <br/>
  
 
@@ -74,26 +57,40 @@
     <div class="modal fade" id="friendModal" role="dialog" style="text-align:center;">
     <div class="modal-dialog">
     
-      <!-- Modal content-->
-      <div class="modal-content">
+       Modal content-->
+    <!--   <div class="modal-content">
         <div class="modal-header"  style="background-color:#5bc0de;">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h4 class="modal-title">Invite your friends
            </h4>
         </div>
         <div class="modal-body">
-          <form name="form1" ng-submit= "main.AddFriend(friend);">
-          <input type="text" name="friend" style="height:35px; width:90%;" placeholder="Enter name" ng-model="main.friend.fname" ng-required="true" />
-          <br/>
-          <input type="email" name="email" style="height:35px; width:90%;" placeholder="Enter Email" ng-model="main.friend.email" ng-required="true" ng-pattern="email_regex"/>
+          <form name="form1" ng-submit= "friend.AddFriend(friendData);">
+            <input type="text"  style="height:35px; width:90%;" placeholder="Enter name" ng-model="friend.friendData.fname" />
+            <br/>
+            <input type="email" name="email" style="height:35px; width:90%;" placeholder="Enter Email" ng-model="friend.friendData.email"/>
+            <br/> --> 
+            <!-- /div>
+            <div class="modal-footer" style="text-align: center;"> -->
+           <!--  <input type="submit" class ="btn btn-lg btn-success" value="Add" data-dismiss="modal"/> -->
+        <!--   </form>
         </div>
-            <div class="modal-footer" style="text-align: center;">
-              <input type="submit" class ="btn btn-lg btn-success" value="Add" ng-disabled = "form1.$invalid" data-dismiss="modal"/>
-
-            </div>
-          </form>
+          
       
        </div> 
      </div>
    </div>
+ -->
 
+
+<!-- <div class="modal-body"> -->
+          <form name="form1" ng-submit= "register.createfriend(friendData);" novalidate>
+            <input type="text"   placeholder="Enter name" ng-model="register.friendData.fname" />
+            <br/>
+            <input type="email"  placeholder="Enter Email" ng-model="register.friendData.email"/>
+            <br/> 
+            <!-- /div>
+            <div class="modal-footer" style="text-align: center;"> -->
+            <button type="submit" value="submit">SUBMIT</button>
+          </form>
+        

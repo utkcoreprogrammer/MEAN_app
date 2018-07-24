@@ -68,26 +68,6 @@ angular.module('mainModule', ['authServices','userServices'])
 		
 	};
 
-	myapp.AddFriend = function(friend)
-	{
-		User.createNew(myapp.friend).then(function(data)
-		{
-			if(myapp.friend)
-			{
-				
-				alert("Friend Successfully Added");	
-				location.reload();
-			}
-			else
-			{
-				
-				alert("Please fill out all the fields");
-			}
-
-			
-		});
-
-	};
 
 
 
