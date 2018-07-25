@@ -81,7 +81,7 @@ router.post('/authenticate', function(req,res)
 router.post('/friendList', function(req,res)
 
 {
-	console.log("hitting friendli");
+	console.log("hitting friendlist");
 	var friend = new Friend();
 	friend.fname = req.body.fname; 
 	friend.email = req.body.email;
@@ -105,6 +105,22 @@ router.post('/friendList', function(req,res)
 		});
 	}
 	
+});
+
+router.get('/getFriendList', function(req,res)
+{
+	Friend.find({}).exec(function(err,friendList)
+	{
+		if(err)
+		{
+			throw err;
+		}
+		else
+		{
+			res.json({data: friendList});
+		}
+	})
+
 });
 
 router.use(function(req,res,next)

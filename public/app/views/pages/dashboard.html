@@ -1,5 +1,5 @@
 <body>
-<center> <header><h1>Hiiiii</h1> </header></center>
+<center> <header><h1>Welcome {{username2}}</h1> </header></center>
 
 <ul class="nav nav-tabs">
   <div class="col-md-4">
@@ -44,8 +44,8 @@
       <div class="modal-body">
         <label> With you and: <br/></label>
 
-        <input type="text" name="bill" class="bill" id="bill" ng-model="Bill.members.name2" autocomplete="on" placeholder="Enter name or email" ng-list>
-        <div class="pull-right"> <button type="btn btn-sm btn-success" data-toggle="modal" data-dismiss="modal" data-target="#billDescModal" ng-click="Bill_check()">
+        <input type="text" name="bill" class="bill" id="bill" ng-model="Bill.members.fname" autocomplete="on" placeholder="Enter name or email" ng-list>
+        <div class="pull-right"> <button type="btn btn-sm btn-success" data-toggle="modal" data-dismiss="modal" data-target="#billDescModal">
         Next </button>
       </div>
     </div>
@@ -79,16 +79,16 @@
         <header ><h3>Bill Description </h3></header> 
       </div>
       <div class="modal-body">
-        With <b>you </b> and: {{Bill.members.name2}} <br/>
+        With <b>you </b> and: {{main.arrayToString(Bill.members.fname)}} <br/>
         <hr/>
         <i class="fas fa-utensils fa-2x" style="float: left;"></i>
         <input type="text" name="bill" ng-model="Bill.groupName" placeholder="Enter a description" style="margin-left: 10px;height:30px;">
         <br />
         <i class="fas fa-rupee-sign fa-2x" style="float: left;margin-top:5px;"></i>
-        <input type="text" name="bill" ng-model="Bill.amount" placeholder="Amount in Rs." style="margin-left: 13px; margin-top: 10px;height: 30px;"> 
+        <input type="text" name="bill" ng-model="Bill.totalAmount" placeholder="Amount in Rs." style="margin-left: 13px; margin-top: 10px;height: 30px;"> 
         <div> <br/>Paid by <button>You</button> and split <button data-toggle="modal" data-target="#splitBillModal">equally</button> </div>
         <hr/>
-        <button type="button" style="border-radius: 10px;margin-top:15px;" class="btn btn-block btn-secondary">You owe {{Bill.members.name2}} Rs. </button>
+        
 
         <br/>
       </div>
@@ -109,29 +109,29 @@
        <br/>
        <br/>
        <div class="text-align-center" id="icon_tray">           
-        <button id="Split_Equally" title="Split bill equally" ng-click="splitEqually();showme1=true"><span style="font-size:22px;">&#61; </span> </button>
-        <button id="Split_By_Percentage" title="Split bill by Percentage" ng-click="splitByPercentage();showme2=true" style="margin-left: 10px;"><span style="font-size:22px;">&#37; </span> </button>
-        <button id="Split_By_Shares" title="Split bill by shares" style="margin-left: 10px;" ng-click="splitByShares();showme3=true"><span style="font-size:22px;">&#45;  </span></button>
-        <button id="Split_Custom" title="Custom Amount Entry" style="margin-left: 10px;" ng-click="splitCustom();showme4=true"><span style="font-size:22px;"> &#x20b9; </span></button>
+        <button id="Split_Equally" title="Split bill equally" ng-click="main.splitEqually();showme1=true"><span style="font-size:22px;">&#61; </span> </button>
+        <button id="Split_By_Percentage" title="Split bill by Percentage" ng-click="main.splitByPercentage();showme2=true" style="margin-left: 10px;"><span style="font-size:22px;">&#37; </span> </button>
+        <button id="Split_By_Shares" title="Split bill by shares" style="margin-left: 10px;" ng-click="main.splitByShares();showme3=true"><span style="font-size:22px;">&#45;  </span></button>
+        <button id="Split_Custom" title="Custom Amount Entry" style="margin-left: 10px;" ng-click="main.splitCustom();showme4=true"><span style="font-size:22px;"> &#x20b9; </span></button>
       </div>  <!-- End of Text Align Center -->
       <br/>
 
       <div ng-show="showme1">
         <ul style="list-style-type:none">
           <div class="col-md-7">
-            <li ng-repeat="name in Bill.members.name2"> 
+            <li ng-repeat="name in Bill.members.fname"> 
               <p style="font-family: Lucida Sans Unicode;size:16px;padding-top: 5px;margin-bottom: 7px;">{{name}} </p>
             </li>
           </div>
           <div class="col-md-5">
-            <li ng-repeat="value in Bill.members.values2"> 
+            <li ng-repeat="value in Bill.members.fname"> 
               <input type="text" placeholder= "{{Bill_equally}}" style="margin-bottom:5px;padding-top:5px; width:100px;height:28px;"/> </li>
             </div>
             
             <div>
 
               <div class="col-md-7">
-                <li style="list-style-type: none"> <p style="font-family: Lucida Sans Unicode;size:16px;">{{self}} </p> </li> 
+                <li style="list-style-type: none"> <p style="font-family: Lucida Sans Unicode;size:16px;"> {{username2}} </p> </li> 
               </div>
               <div class="col-md-5">
                 <li>
@@ -152,13 +152,13 @@
       <div ng-show="showme2">
         <ul style="list-style-type:none">
           <div class="col-md-7">
-            <li ng-repeat="name in Bill.members.name2 track by $index"> 
+            <li ng-repeat="name in Bill.members.fname"> 
               <p style="font-family: Lucida Sans Unicode;size:16px;padding-top: 5px; margin-bottom: 7px;"> {{name}} </p>
             </li>
           </div>
           <div class="col-md-5">
-            <li ng-repeat="value in Bill.members.name2 track by $index">            
-             <input type="text" id="percentValues" ng-model= "Bill.members.values2[$index]" placeholder= "Enter Percentage" style="margin-bottom:5px;padding-top:5px; width:100px;height:28px;" ng-list/></li>
+            <li ng-repeat="name in Bill.members.fname">           
+             <input type="text" id="percentValues" ng-model= "Values[$index]" placeholder= "Enter Percentage" style="margin-bottom:5px;padding-top:5px; width:100px;height:28px;" ng-list/></li>
 
              
            </div>
@@ -166,7 +166,7 @@
            <div>
 
              <div class="col-md-7">
-              <li style="list-style-type: none"> <p style="font-family: Lucida Sans Unicode;size:16px;">{{self}} </p> </li> 
+              <li style="list-style-type: none"> <p style="font-family: Lucida Sans Unicode;size:16px;">{{username2}} </p></li> 
             </div>
             <div class="col-md-5">
               <li>
@@ -177,7 +177,7 @@
 
        </ul>
 
-       <button type="button" class="btn btn-sm btn-success" style="margin-left: 80px;margin-top: 10px; margin-bottom:10px;" ng-click="saveBillDataPercent()" data-dismiss="modal">
+       <button type="button" class="btn btn-sm btn-success" style="margin-left: 80px;margin-top: 10px; margin-bottom:10px;" ng-click="main.saveBillDataPercent()" data-dismiss="modal">
         Save
       </button>
 
@@ -202,7 +202,7 @@
           <div>
 
            <div class="col-md-7">
-            <li style="list-style-type: none"> <p style="font-family: Lucida Sans Unicode;size:16px;">{{self}}</p> </li> 
+            <li style="list-style-type: none"> <p style="font-family: Lucida Sans Unicode;size:16px;">{{username2}}</p> </li> 
           </div>
           <div class="col-md-5"> 
             <li>
@@ -236,7 +236,7 @@
         <div>
 
          <div class="col-md-7">
-          <li style="list-style-type: none"> <p style="font-family: Lucida Sans Unicode;size:16px;">{{self}}</p> </li> 
+          <li style="list-style-type: none"> <p style="font-family: Lucida Sans Unicode;size:16px;">{{username2}}</p> </li> 
         </div>
         <div class="col-md-5">
           <li>

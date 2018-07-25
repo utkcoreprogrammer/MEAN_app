@@ -25,7 +25,7 @@ var app = angular.module("routesApp", ["ngRoute"])
 
 			.when("/dashboard", 
 			{
-			templateUrl : "app/views/dashboard.html",
+			templateUrl : "app/views/pages/dashboard.html",
 			controller :  "mainCtrl",
 			controllerAs :  "main"			
 			}) 
