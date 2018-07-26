@@ -2,19 +2,22 @@ var mongoose  = require('mongoose');
 var Schema = mongoose.Schema;
 var billSchema = new Schema(
 	{
-		groupName: {type: String, lowercase: true},
-		members: {
-			type: Array,
-			item: {
-					name: { type: String, lowercase: true},
-					oweAmount : { type : Number}
-				  }
-			},
+		groupName: String,
+		members:{
+				type: Array,
+				item:  {
+					 		type: Object,
+					 		properties: 
+							{
+							newame: String,
+							oweAmount : Number
+				    		}
+						}
+				},
 
-		totalAmount : {type : Number}
-
-
+		totalAmount : Number
 	});
+
 module.exports = mongoose.model('Bill', billSchema)
 
 

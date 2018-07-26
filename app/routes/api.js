@@ -1,5 +1,7 @@
 var User = require('../models/userModel');
 var Friend = require('../models/friendModel');
+var Bill = require('../models/billModel');
+var Group = require('../models/groupModel');
 var jwt = require('jsonwebtoken');
 var secret = "Harry";
 module.exports = function(router) {
@@ -107,6 +109,47 @@ router.post('/friendList', function(req,res)
 	
 });
 
+router.post('/groupList', function(req,res)
+{
+	console.log("Hitting group List API");
+	var group = new Group(req.body);
+
+	group.save((err, user) => 
+		{
+			if(err)
+			{
+			res.json({success: false, message: "Some error occured in adding"});
+			}
+			else
+			{
+			res.status(200).json({success: true, message : "Group created"});
+			}
+		});
+
+});
+
+router.post('/billData', function(req,res)
+
+{
+	console.log("Hitting bill data api");
+
+	var bill = new Bill(req.body);
+	// bill= req.body;
+
+	bill.save((err, user) => 
+		{
+			if(err)
+			{
+			res.json({success: false, message: "Some error occured"});
+			}
+			else
+			{
+			res.status(200).json({success: true, message : "Bill added"});
+			}
+		});
+
+});
+
 router.get('/getFriendList', function(req,res)
 {
 	Friend.find({}).exec(function(err,friendList)
@@ -118,6 +161,23 @@ router.get('/getFriendList', function(req,res)
 		else
 		{
 			res.json({data: friendList});
+		}
+	})
+
+});
+
+
+router.get('/getGroupList', function(req,res)
+{
+	Group.find({}).exec(function(err,groupList)
+	{
+		if(err)
+		{
+			throw err;
+		}
+		else
+		{
+			res.json({data: groupList});
 		}
 	})
 

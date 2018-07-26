@@ -3,7 +3,6 @@ angular.module('mainModule', ['authServices','userServices'])
 {
 	console.log("testing main controller");
 	var myapp = this;
-	$scope.billData = {};
 	$scope.Values = [];
 	var item = {};
 	$scope.percentPlaceholder = "Enter Percentage";
@@ -45,7 +44,6 @@ angular.module('mainModule', ['authServices','userServices'])
 			
 			if(data.data.success == true)
 			{
-				
 				$timeout(function() 
 				{	
 				$location.path('/dashboard');
@@ -79,7 +77,6 @@ angular.module('mainModule', ['authServices','userServices'])
 	{
 
 		return string.join(" | ");
-
 	};
 	
 	myapp.splitEqually = function()
@@ -88,109 +85,56 @@ angular.module('mainModule', ['authServices','userServices'])
 		$scope.showme2= false;
 		$scope.showme3= false;															
 		$scope.showme4= false;
-		// $scope.Bill_group_name = $scope.Bill.groupName;
-		// $scope.Bill.members_oweAmount = $scope.Bill.members.amount;
-		// $scope.Bill.members_fname = $scope.Bill.members.fname;
-		// $scope.Bill_members_count = $scope.Bill.members.length+1;
-		// $scope.Bill_total_amount = $scope.Bill.totalAmount;
-		// $scope.Bill_equally = $scope.Bill_total_amount / $scope.Bill_members_count;
+
+		$scope.Value_equally = ($scope.Bill.totalAmount) / ($scope.Bill.members.fname.length+1);
 					
-			if(isNaN($scope.Bill_total_amount))
+			if(isNaN($scope.Bill.totalAmount))
 			{
 
 			alert("Amount is Required");
 
 			}
 
-			if(!$scope.Bill_group_name)
+			if(!$scope.Bill.groupName)
 			{
 
 			alert("Description is Required");
 
 			}
-
-			
-
-
-
-
-		
-
-
-
 	};
 	
-
 	myapp.splitByPercentage = function()
 	{
 		$scope.showme1 = false;
 		$scope.showme3= false;												
 		$scope.showme4= false;
-		$scope.Bill_group_name = $scope.Bill.groupName;
-		$scope.Bill.members_oweAmount = $scope.Values;
-		//console.log("$scope.Values.ByPercent" , $scope.Values.ByPercent);
-		$scope.Bill.members_fname = $scope.Bill.members.fname;
-		$scope.Bill_members_count = $scope.Bill.members.length+1;
-		$scope.Bill_total_amount = $scope.Bill.totalAmount;
-		$scope.Bill_equally = $scope.Bill_total_amount / $scope.Bill_members_count;
+		$scope.Bill_percentValues = $scope.Values;
 
-			if(!$scope.Bill_group_name)
+			if(!$scope.Bill.groupName)
 			{
 
 			alert("Description is Required");
 
 			}	
 
-			$scope.billItems.groupName = $scope.Bill.groupName;
-			$scope.billItems.members = {};
-			$scope.billItems.members.fname = $scope.Bill.members.fname;
-			//$scope.billItems.members.amount = $scope.Values;
-			$scope.billItems.totalAmount = $scope.Bill.totalAmount;
-			var item =
-			{
-		
-			 	"name" : $scope.Bill.members_fname,
-			 	"oweAmount" : $scope.Bill.members_oweAmount
-			};	
-
-			   $scope.billData =
-			{
-				"groupName" : $scope.Bill_group_name,
-			 	"members" : item,
-			 	"totalAmount" : $scope.Bill_total_amount
-			};
-
-		console.log("item object", item);
-	console.log("billItems" , $scope.billItems);
-	console.log("billData" , $scope.billData);
 			
-		  
-
-		
-
-
-
-
+			
+		console.log("billItems" , $scope.billItems);
 	};
 	
-	myapp.saveBillDataPercent = function()
-		{
-	console.log("item object", item);
-	console.log("billData" , $scope.billData);
-		};
 	myapp.splitByShares = function()
 	{
 		$scope.showme1 = false;
 		$scope.showme2= false;															
 		$scope.showme4= false;
+		$scope.Bill_shareValues = $scope.Values;
 
-			if(!$scope.Bill_group_name)
+			if(!$scope.Bill.groupName)
 			{
 
 			alert("Description is Required");
 
 			}	
-
 	};
 
 	myapp.splitCustom = function()
@@ -198,14 +142,127 @@ angular.module('mainModule', ['authServices','userServices'])
 		$scope.showme1 = false;
 		$scope.showme2= false;
 		$scope.showme3= false;
+		$scope.Bill_customValues = $scope.Values;
 
-			if(!$scope.Bill_group_name)
+
+			if(!$scope.Bill.groupName)
 			{
 
 			alert("Description is Required");
 
 			}		
 	};
+
+	myapp.saveBillDataEqually = function()
+	{
+			$scope.billItems.groupName = $scope.Bill.groupName;
+			$scope.billItems.totalAmount = $scope.Bill.totalAmount;
+			$scope.billItems.members = [];
+			for (var i=0; i< $scope.Bill.members.fname.length; i++)
+			{
+				var item =
+					{
+					 	"name" : $scope.Bill.members.fname[i],
+					 	"equalAmount" : $scope.Value_equally
+					};	
+					   
+					$scope.billItems.members.push(item);
+			}
+
+			console.log("billItems from equal" , $scope.billItems);
+			$http.post('/api/billData', $scope.billItems).then(function(data)
+				{
+					console.log("data >>>>>",data);
+				});
+
+			$scope.billItems = {};
+	};
+
+	myapp.saveBillDataPercent = function()
+	{
+			$scope.billItems.groupName = $scope.Bill.groupName;
+			$scope.billItems.totalAmount = $scope.Bill.totalAmount;
+			$scope.billItems.members = [];
+
+			for (var i=0; i< $scope.Bill.members.fname.length; i++)
+			{
+				var item =
+					{
+					 	"name" : $scope.Bill.members.fname[i],
+					 	"percentAmount" : $scope.Bill_percentValues[i]
+					};	
+					   
+					$scope.billItems.members.push(item);
+			}
+	
+			console.log("billItems from percent" , $scope.billItems);
+			console.log("Percent Amount",$scope.Values);
+			$http.post('/api/billData', $scope.billItems).then(function(data)
+				{
+					console.log("data >>>>>",data);
+				});
+
+			$scope.billItems = {};
+	};
+
+	myapp.saveBillDataShares = function()
+	{
+			$scope.billItems.groupName = $scope.Bill.groupName;
+			$scope.billItems.totalAmount = $scope.Bill.totalAmount;
+			$scope.billItems.members = [];
+
+			for (var i=0; i< $scope.Bill.members.fname.length; i++)
+			{
+				var item =
+					{
+					 	"name" : $scope.Bill.members.fname[i],
+					 	"shareValue" : $scope.Bill_shareValues[i]
+					};	
+					   
+					$scope.billItems.members.push(item);
+			}
+	
+			console.log("billItems from percent" , $scope.billItems);
+			console.log("Percent Amount",$scope.Values);
+			$http.post('/api/billData', $scope.billItems).then(function(data)
+				{
+					console.log("data >>>>>",data);
+				});
+			
+			$scope.billItems = {};
+
+	};
+
+	myapp.saveBillDataCustom = function()
+	{
+			$scope.billItems.groupName = $scope.Bill.groupName;
+			$scope.billItems.totalAmount = $scope.Bill.totalAmount;
+			$scope.billItems.members = [];
+
+			for (var i=0; i< $scope.Bill.members.fname.length; i++)
+			{
+				var item =
+					{
+					 	"name" : $scope.Bill.members.fname[i],
+					 	"customValue" : $scope.Bill_customValues[i]
+					};	
+					   
+					$scope.billItems.members.push(item);
+			}
+	
+			console.log("billItems from percent" , $scope.billItems);
+			console.log("Percent Amount",$scope.Values);
+			$http.post('/api/billData', $scope.billItems).then(function(data)
+				{
+					console.log("data >>>>>",data);
+				});
+			
+			$scope.billItems = {};
+
+
+	};
+
+
 
 
 
