@@ -2,7 +2,6 @@ angular.module('authServices',[])
 .factory('Auth',function($http, AuthToken)
 {
 	var authFactory={};
-	console.log("Auth Service hitting");
 	authFactory.find=function(credentials)
 	{
 		return $http.post('/api/authenticate',credentials).then(function(data)

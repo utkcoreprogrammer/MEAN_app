@@ -37,12 +37,8 @@ router.post('/users', function(req,res)
 router.post('/authenticate', function(req,res)
 
 {
-	//var user = new User();
-	//var user_name = req.body.username;
 	var email = req.body.email;
 	var password = req.body.password;
-	console.log(email);
-	console.log(password);
 	if(req.body.email == null || req.body.email == '' || req.body.password == null || req.body.password == '')
 	{
 		console.log("Ensure that Email & Password is provided");
@@ -106,10 +102,10 @@ router.post('/friendList', function(req,res)
 			}
 		});
 	}
-	
 });
 
 router.post('/groupList', function(req,res)
+
 {
 	console.log("Hitting group List API");
 	var group = new Group(req.body);
@@ -125,7 +121,6 @@ router.post('/groupList', function(req,res)
 			res.status(200).json({success: true, message : "Group created"});
 			}
 		});
-
 });
 
 router.post('/billData', function(req,res)
@@ -134,8 +129,6 @@ router.post('/billData', function(req,res)
 	console.log("Hitting bill data api");
 
 	var bill = new Bill(req.body);
-	// bill= req.body;
-
 	bill.save((err, user) => 
 		{
 			if(err)
@@ -147,10 +140,10 @@ router.post('/billData', function(req,res)
 			res.status(200).json({success: true, message : "Bill added"});
 			}
 		});
-
 });
 
 router.get('/getFriendList', function(req,res)
+
 {
 	Friend.find({}).exec(function(err,friendList)
 	{
@@ -163,11 +156,11 @@ router.get('/getFriendList', function(req,res)
 			res.json({data: friendList});
 		}
 	})
-
 });
 
 
 router.get('/getGroupList', function(req,res)
+
 {
 	Group.find({}).exec(function(err,groupList)
 	{
@@ -180,10 +173,10 @@ router.get('/getGroupList', function(req,res)
 			res.json({data: groupList});
 		}
 	})
-
 });
 
 router.use(function(req,res,next)
+	
 {
 	var token = req.body.token || req.body.query || req.headers['x-access-token'];
 	if(token)

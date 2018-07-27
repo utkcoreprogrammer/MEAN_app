@@ -8,41 +8,28 @@ angular.module('userCtrls',['userServices'])
 	$scope.friendList = [];
 	$scope.groupMembers = [];
 	$scope.groupList = [];
-	app.friendData = {
+	app.friendData= {
 		     		 fname: '',
              		 email: ''
-					 };
+					};
 	app.groupData = {
 		     		 groupName: '',
              		 members: ['']
-					 };
+					};
 	$http.get('/api/getFriendList').then(function(data)
     {
-	
-		// app.friendinfo=data;
 		$scope.friendList = data.data.data;
 		$scope.groupMembers = data.data.data;
-		console.log("Friend Info" , $scope.friendList);
 		$scope.item = $scope.groupMembers.map(({fname}) => fname)
-		console.log("Group Info" , $scope.item);
-	
 	});
 
 	$http.get('/api/getGroupList').then(function(data)
-    {
-	
-		console.log("data ->>>>>",data);
+    {	
 		$scope.groupList = data.data.data;
-		console.log("Group Info", $scope.groupList);
-		
-	
 	});
-
-
 
 	app.regUser=function(regData)
 	{
-		console.log("app.regData", app.regData);
 		User.create(app.regData).then(function(data)
 		{
 			if(app.regData)
@@ -51,7 +38,7 @@ angular.module('userCtrls',['userServices'])
 				alert("User Successfully Registered");
 				$timeout(function() 
 				{	
-				$location.path('/home');
+				$location.path('/postSignup');
 				}, 1000);
 			}
 			else
@@ -62,29 +49,24 @@ angular.module('userCtrls',['userServices'])
 		});
 	};
 
-
-	//function for storing friends data
-
-
-
+	//function for creating a new friend
 	app.createfriend= function()
 	{	
-		console.log("Inside add friend",app.friendData);
 		$http.post('/api/friendList',app.friendData);
 		location.reload();
 		alert("Friend added Successfully");
-		
-	
 	};
 
 	app.createGroup= function()
 	{	
-		console.log("Inside create group",app.groupData);
 		$http.post('/api/groupList',app.groupData);
 		location.reload();
 		alert("Group created Successfully");
-		
-	
+	};
+	app.arrayToString = function(string)
+	{
+
+		return string.join(", ");
 	};
 
 });

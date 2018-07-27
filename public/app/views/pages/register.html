@@ -1,80 +1,73 @@
-
+    <style> body{background-size: cover; background-image:url("../assets/images/money.jpg");" } </style>
 <body>
+    
+<center> <header><h1>Welcome to the splitwise</h1> </header></center>
    
     <div class="container">
-        <div>
-    <section id="content" ng-cloak>
+    <div>
+        <section id="content" ng-cloak>
        
  
 
- <form name="myForm" ng-submit= "register.regUser(regData);" novalidate="novalidate">
-                <!-- <fieldset  style="width:100px">
-   -->              
-                    <div class="col-md-7">
+            <form name="myForm" ng-submit= "register.regUser(regData);" novalidate="novalidate">
+                <h1>New User</h1>
+              
+                <div class="col-md-7">
                     <label>
                     <span>Username <span class="required">*</span></span>
                     <input type="text" class="input-field" name="name"  ng-model="register.regData.username" ng-required="true"></label>
-                    </div>
+                </div>
 
-                    <div class="col-md-5" style="color: red; margin-top: 25px;" ng-show="myForm.name.$touched && myForm.name.$invalid">Name is required.
-                    </div>
+                <div class="col-md-5" style="color: red; margin-top: 25px;"      ng-show="myForm.name.$touched && myForm.name.$invalid">    Name is required.
+                </div>
     
-                    <div class="col-md-7">
+                <div class="col-md-7">
                     <label>
                     <span>EmailId<span class="required">*</span></span>
                     <input type="email" name="email" class="input-field" ng-model="register.regData.email" ng-pattern="eml_add" ng-required="true" />
                     </label>
-                    </div>
+                </div>
 
-                    <div class="col-md-5" style="margin-top:23px;">
+                <div class="col-md-5" style="margin-top:23px;">
                     <span style="color: red;" ng-if="myForm.email.$error.required && myForm.email.$touched">Email is required</span>
                     <span style="color: red;" ng-show="myForm.email.$error.pattern || myForm.email.$error.email">Invalid Email</span>
-                    </div>
+                </div>
                     
 
-                    <div class="col-md-7">
+                <div class="col-md-7">
                     <label for="field2"><span>Password<span class="required">*</span></span>
-                    <input type="password" name="password" width="10px" class="input-field" ng-model="register.regData.password"  ng-pattern="pass_regex" ng-minlength = "6" ng-required="true"/></label>
-                    </div>
+                    <input type="password" name="password" width="10px" class="input-field" ng-model="register.regData.password"  ng-pattern="pass_regex" ng-minlength = "8" ng-required="true"/></label>
+                </div>
 
-                    <div class="col-md-5" style="margin-top:23px;">
+                <div class="col-md-5" style="margin-top:23px;">
                     <span style="color: red" ng-if="myForm.password.$error.required && myForm.password.$touched">Password is required</span>
                     <span style="color: red" ng-show="myForm.password.$error.pattern">Invalid Password (Must contain a lowercase letter, an uppercase letter, a special character and a number)</span>
-                    </div>
+                </div>
 
-                    <div class="col-md-7">
+                <div class="col-md-7">
                     <p><label for="field2"><span> Confirm Password<span class="required">*</span></span>
-                    <input type="password"  name="cpassword" class="input-field" ng-model="cpassword" required />
+                    <input type="password"  name="cpassword" class="input-field" ng-model="cpassword" ng-required="true" />
                     </label>
-                    </div>
+                </div>
 
-                    <div class="col-md-5" style="color:red;margin-top:23px;" ng-if="myForm.password.$valid && myForm.cpassword.$dirty && register.regData.password != cpassword">Password and confirm password should be same
-                    </div>
-                     <!-- <span style="color: red" ng-show="myForm.cpassword.$touched && myForm.cpassword.$invalid">Enter same as above.</span> -->
+                <div class="col-md-5" style="color:red;margin-top:23px;"
+                     ng-if ="myForm.password.$valid && myForm.cpassword.$dirty && register.regData.password != cpassword">Password and confirm password should be same
+                </div>
                     </p>
 
-                    <div class="col-md-12">
+                <div class="col-md-12">
 
                     <label>
-                        <input type="submit" id="submit" value="Submit" ng-disabled = "myForm.name.$dirty && myForm.name.$invalid && myForm.email.$dirty && myForm.email.$invalid && myForm.password.$dirty && myForm.password.$invalid && myForm.cpassword.invalid">
+                        <input type="submit" id="submit" value="Submit" ng-disabled = "myForm.name.$invalid || myForm.email.$invalid || myForm.password.$invalid || myForm.cpassword.$invalid">
                     </label>
                     
-                    </div>
+                </div>
 
          
             </form>
-        
-            <!-- <div class=""> -->
-            <div class="" ng-show="1==2">  
-                <div class="alert alert-success">{{successMsg}}</div>
-            </div>
-           
-            <div class="" ng-show="1==2"> 
-                <div class="alert alert-danger">{{errorMsg}}</div>
-            </div>
  
 
-    </section><!-- content -->
+        </section><!-- content -->
 
         </div>
     </div>

@@ -1,7 +1,7 @@
 angular.module('mainModule', ['authServices','userServices'])
 .controller('mainCtrl', function($scope,$http,$location,$timeout,Auth,$rootScope,User)
 {
-	console.log("testing main controller");
+
 	var myapp = this;
 	$scope.Values = [];
 	var item = {};
@@ -17,22 +17,18 @@ angular.module('mainModule', ['authServices','userServices'])
 
 		if(Auth.isLoggedIn())
 		{
-			console.log("User logged in");
 			myapp.userLoggedIn = true;
 			Auth.getUser().then(function(data)
 			{
-			console.log("Data from getUser", data.data.username);
 			myapp.username = data.data.username;
 			$scope.username2 = data.data.username;
 			});
 		}
 		else
 		{
-		console.log("Not logged in");
 		myapp.userLoggedIn = false;
 		myapp.username = '';
 		}
-
 	});
 
 
@@ -71,7 +67,6 @@ angular.module('mainModule', ['authServices','userServices'])
 		{
 		$location.path("/logout");
 		}, 2000);
-		console.log("logout success");	
 	};
 	myapp.arrayToString = function(string)
 	{
@@ -116,10 +111,6 @@ angular.module('mainModule', ['authServices','userServices'])
 			alert("Description is Required");
 
 			}	
-
-			
-			
-		console.log("billItems" , $scope.billItems);
 	};
 	
 	myapp.splitByShares = function()
@@ -172,7 +163,7 @@ angular.module('mainModule', ['authServices','userServices'])
 			console.log("billItems from equal" , $scope.billItems);
 			$http.post('/api/billData', $scope.billItems).then(function(data)
 				{
-					console.log("data >>>>>",data);
+					
 				});
 
 			$scope.billItems = {};
@@ -195,11 +186,9 @@ angular.module('mainModule', ['authServices','userServices'])
 					$scope.billItems.members.push(item);
 			}
 	
-			console.log("billItems from percent" , $scope.billItems);
-			console.log("Percent Amount",$scope.Values);
 			$http.post('/api/billData', $scope.billItems).then(function(data)
 				{
-					console.log("data >>>>>",data);
+					
 				});
 
 			$scope.billItems = {};
@@ -222,15 +211,12 @@ angular.module('mainModule', ['authServices','userServices'])
 					$scope.billItems.members.push(item);
 			}
 	
-			console.log("billItems from percent" , $scope.billItems);
-			console.log("Percent Amount",$scope.Values);
 			$http.post('/api/billData', $scope.billItems).then(function(data)
 				{
-					console.log("data >>>>>",data);
+					
 				});
 			
 			$scope.billItems = {};
-
 	};
 
 	myapp.saveBillDataCustom = function()
@@ -244,28 +230,17 @@ angular.module('mainModule', ['authServices','userServices'])
 				var item =
 					{
 					 	"name" : $scope.Bill.members.fname[i],
-					 	"customValue" : $scope.Bill_customValues[i]
+					 	"customAmount" : $scope.Bill_customValues[i]
 					};	
 					   
 					$scope.billItems.members.push(item);
 			}
-	
-			console.log("billItems from percent" , $scope.billItems);
-			console.log("Percent Amount",$scope.Values);
+
 			$http.post('/api/billData', $scope.billItems).then(function(data)
 				{
-					console.log("data >>>>>",data);
+					
 				});
 			
 			$scope.billItems = {};
-
-
 	};
-
-
-
-
-
-
-
 });

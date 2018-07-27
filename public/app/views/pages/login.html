@@ -1,4 +1,4 @@
-
+    <style> body{background-size: cover; background-image:url("../assets/images/mon.png");" } </style>
 <center> <header><h1>Welcome to the splitwise</h1> </header></center>
 <div class="container">
 	<section id="content">
@@ -9,7 +9,6 @@
 			</div>
 			<div>
 				<input type="password" name= "password" placeholder="Enter your Password" ng-required="true" id="password" ng-model = "main.credentials.password" />
-				<!-- <span ng-if="form1.pass.$error.pattern">Not a valid password!</span> -->
 			</div>
 
 			<div class="text-align-center" style="text-align: center;">
@@ -21,7 +20,7 @@
 					<span style="font-family: Rockwell; font-size:13px;">New User ?  Signup Here </span></a>
 			</div>
 
-			<div ng-show = "1==1">
+			<div>
 				<span style="color: red" ng-if="form1.password.$error.required && form1.password.$touched">Password is required</span> 
 			</div>
 
